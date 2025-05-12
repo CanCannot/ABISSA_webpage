@@ -21,6 +21,11 @@ export default function Home() {
         <Link href="/settings">
           <button className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Settings</button>
         </Link>
+
+        <Link href="/admin_page">
+          <button className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Admin Page</button>
+        </Link>
+
       </div>
     </div>
   )
