@@ -26,6 +26,10 @@ export default function Home() {
           <button className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Admin Page</button>
         </Link>
 
+        <Link href="/test_page">
+          <button className="px-6 py-3 bg-red-500 text-white rounded-lg hover:bg-red-600 transition">Test Page</button>
+        </Link>
+
       </div>
     </div>
   )
