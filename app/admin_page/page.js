@@ -16,12 +16,12 @@ const mockData = [
 ];
 
 export default function Home() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [addModal, setIsAddModalOpen] = useState(false);
+  const [modifyModal, setIsModifyModalOpen] = useState(false);
 
   return (
     <div className="bg-neutral-300 min-h-screen">
-
-    {/* search bar */}
+      {/* search bar */}
       <div className="flex items-center space-x-2 pt-10 pl-11">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -48,21 +48,22 @@ export default function Home() {
           <div className="space-x-4">
             <button
               className="px-6 py-3 border-2 border-black bg-neutral-400 text-white rounded-lg hover:bg-neutral-600 transition"
-              onClick={() => setIsModalOpen(true)}
+              onClick={() => setIsAddModalOpen(true)}
             >
               Add
             </button>
             <button className="px-6 py-3 border-2 border-black bg-neutral-400 text-white rounded-lg hover:bg-neutral-600 transition">
               Remove
             </button>
-            <button className="px-6 py-3 border-2 border-black bg-neutral-400 text-white rounded-lg hover:bg-neutral-600 transition">
+            <button className="px-6 py-3 border-2 border-black bg-neutral-400 text-white rounded-lg hover:bg-neutral-600 transition"
+            onClick={()=> setIsModifyModalOpen(true)}>
               Modify
             </button>
           </div>
         </div>
       </div>
 
-     {/* Table */}
+      {/* Table */}
       <div className="overflow-x-auto p-10">
         <table className="min-w-full border-2 border-black text-center">
           <thead className="bg-neutral-400 text-black">
@@ -85,7 +86,7 @@ export default function Home() {
                   <input type="checkbox" className="mx-auto" />
                 </td>
                 <td className="border p-2">{item.stock}</td>
-                <td className="w-[50px] h-[50px] items-center justify-center">
+                <td className="w-25 h-auto items-center justify-center">
                   <img
                     src={item.image}
                     className="w-full h-full object-cover mx-auto"
@@ -104,56 +105,110 @@ export default function Home() {
         </table>
       </div>
 
-      {/* Modal/pop up for add */}
-      {isModalOpen && (
-        <div className="fixed inset-0 bg-neutral-300 opacity-95 flex items-center justify-center z-50">
-          <div className="bg-neutral-300 border-2 border-black rounded-lg p-6 w-4xl h-auto ">
-            <h2 className="text-lg text-black font-semibold mb-4">Add New Item</h2>
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                // handle logic here
-                setIsModalOpen(false);
-              }}
-              className="space-y-3"
+      {/* Modal/pop up for add button */}
+      {addModal && (
+        <div className="fixed inset-0 bg-neutral-300 opacity-98 flex items-center justify-center z-50">
+          <div className="bg-neutral-300 border-2 border-black p-7 w-4xl h-auto relative flex flex-col">
+            {/* Close button */}
+            <button
+              onClick={() => setIsAddModalOpen(false)}
+              className="absolute top-2 right-3 text-black font-bold"
             >
-              <input
-                type="text"
-                placeholder="Name"
-                className="w-full border p-2 rounded"
-                required
-              />
-              <input
-                type="text"
-                placeholder="Brand"
-                className="w-full border p-2 rounded"
-                required
-              />
-              <input
-                type="number"
-                placeholder="Price"
-                className="w-full border p-2 rounded"
-                required
-              />
-              <div className="flex justify-between pt-4">
-                <button
-                  type="button"
-                  onClick={() => setIsModalOpen(false)}
-                  className="text-gray-600"
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="bg-blue-600 text-white px-4 py-2 rounded"
-                >
-                  Save
-                </button>
+              ✕
+            </button>
+
+            {/* Modal Content */}
+            <div className="flex flex-2 ">
+              {/* Form Section */}
+              <form className="flex flex-col space-y-2 w-1/2 text-black pr-20 justify-center">
+                {[
+                  "Product ID",
+                  "Product Name",
+                  "Product Brand",
+                  "Price",
+                  "Category",
+                  "Aisle",
+                  "Stock",
+                ].map((placeholder, index) => (
+                  <input
+                    key={index}
+                    placeholder={placeholder}
+                    className="border border-black px-2 py-1 text-sm"
+                  />
+                ))}
+              </form>
+
+              {/* Map Section */}
+              <div className="border border-black bg-white w-2xl flex items-center justify-center  text-gray-600 text-sm">
+                Aisle Map
               </div>
-            </form>
+            </div>
+
+            {/* Buttons at the bottom */}
+            <div className="flex space-x-4 pt-4 pl-2 text-black">
+              <button className="w-30 h-7 bg-sky-400 px-4 py-1 flex items-center justify-center rounded-2xl border border-black hover:bg-sky-900">
+                Add
+              </button>
+              <button className="w-30 h-7 bg-sky-400 px-4 py-1 rounded-2xl border flex items-center justify-center border-black hover:bg-sky-900">
+                Clear
+              </button>
+            </div>
           </div>
         </div>
       )}
+
+    {/* pop up/ modal for modify button */}
+      {modifyModal && (
+        <div className="fixed inset-0 bg-neutral-300 opacity-98 flex items-center justify-center z-50">
+          <div className="bg-neutral-300 border-2 border-black p-7 w-4xl h-auto relative flex flex-col">
+            {/* Close button */}
+            <button
+              onClick={() => setIsModifyModalOpen(false)}
+              className="absolute top-2 right-3 text-black font-bold"
+            >
+              ✕
+            </button>
+
+            {/* Modal Content */}
+            <div className="flex flex-2 ">
+              {/* Form Section */}
+              <form className="flex flex-col space-y-2 w-1/2 text-black pr-20 justify-center">
+                {[
+                  "Product ID",
+                  "Product Name",
+                  "Product Brand",
+                  "Price",
+                  "Category",
+                  "Aisle",
+                  "Stock",
+                ].map((placeholder, index) => (
+                  <input
+                    key={index}
+                    placeholder={placeholder}
+                    className="border border-black px-2 py-1 text-sm"
+                  />
+                ))}
+              </form>
+
+              {/* Map Section */}
+              <div className="border border-black bg-white w-2xl flex items-center justify-center  text-gray-600 text-sm">
+                Aisle Map
+              </div>
+            </div>
+
+            {/* Buttons at the bottom */}
+            <div className="flex space-x-4 pt-4 pl-2 text-black">
+              <button className="w-30 h-7 bg-sky-400 px-4 py-1 flex items-center justify-center rounded-2xl border border-black hover:bg-sky-900">
+                Modify
+              </button>
+              <button className="w-30 h-7 bg-sky-400 px-4 py-1 rounded-2xl border flex items-center justify-center border-black hover:bg-sky-900">
+                Clear
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

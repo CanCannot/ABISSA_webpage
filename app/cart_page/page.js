@@ -40,7 +40,7 @@ export default function Home() {
       <div className="flex justify-center pt-15">
         
         
-      <div className="w-full max-w-[1800px] h-[500px] sm:h-[600px] md:h-[650px] lg:h-[700px] rounded-2xl bg-neutral-400 flex items-center justify-center border-2 border-slate-800 mx-auto px-4">
+      <div className="w-full max-w-[1800px] h-[500px] sm:h-[600px] md:h-[650px] lg:h-[700px] relative rounded-2xl bg-neutral-400 flex items-center justify-center border-2 border-slate-800 mx-auto px-4">
        <div className="flex flex-col items-center space-y-2">
         <p className="text-black text-4xl">Cart is Currently Empty </p>
         <p className="text-black text-4xl">Place and Item into the Cart to Start </p>
